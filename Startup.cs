@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MobileOrder.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MobileOrder
 {
@@ -24,6 +26,9 @@ namespace MobileOrder
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<MobileOrderContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("MobileOrderContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
